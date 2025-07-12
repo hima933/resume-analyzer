@@ -1,6 +1,12 @@
 import streamlit as st
 import fitz  # PyMuPDF
 import spacy
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+    importlib.invalidate_caches()
+    nlp = spacy.load("en_core_web_sm")
 
 # Load spaCy model
 nlp = spacy.load("en_core_web_sm")
